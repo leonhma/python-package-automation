@@ -638,7 +638,7 @@ class REST():
 
            takes as arguments:
 
-           instrument (required): the isin of the instrument you want to get info about'''
+           instrument (required): the isin of the instrument to get info about'''
 
         assert instrument is not None, 'instrument must be specified'
 
