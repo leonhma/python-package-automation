@@ -5,7 +5,7 @@ on:
     types: [ prereleased ]
 
 jobs:
-  build and upload nightly:
+  build_and_upload_nightly:
 
     runs-on: ubuntu-latest
 
