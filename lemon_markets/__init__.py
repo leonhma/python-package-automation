@@ -89,7 +89,7 @@ class WebSocket():
             while True:
                 try:
                     response = eval(ws.recv())
-                    if(time.time()-self._last_message_time > self._frequency_limit):
+                    if(time.time() - self._last_message_time > self._frequency_limit):
                         self._callback(instrument=response['isin'], price=response['price'], time=response['date'])
                 except Exception:
                     break
@@ -217,7 +217,7 @@ class Account():
                      instrument=None,
                      quantity=None,
                      order_type=None,
-                     valid_until=time.time()+300,
+                     valid_until=time.time() + 300,
                      limit_price=None,
                      stop_price=None):
 
@@ -439,7 +439,7 @@ class Account():
 
             portfolio_list = []
             for i, item in enumerate(pages_list):
-                page_offset = i*1000+offset
+                page_offset = i * 1000 + offset
                 r_aggregated = eval(http.request_encode_url(method='GET',
                                                             url=url,
                                                             headers=self._auth_header,
@@ -549,7 +549,7 @@ class Account():
 
         m1candles_list = []
         for i, item in enumerate(pages_list):
-            page_offset = i*1000+offset
+            page_offset = i * 1000 + offset
             r_m1candles = eval(http.request_encode_url(method='GET',
                                                        url=f'https://api.lemon.markets/rest/v1/data/instruments/{instrument}/candle/m1/',
                                                        headers=self._auth_header,
@@ -618,7 +618,7 @@ class REST():
 
         instrument_list = []
         for i, item in enumerate(page_list):
-            page_offset = i*1000+offset
+            page_offset = i * 1000 + offset
             r_instrumentlist = eval(http.request_encode_url(method='GET',
                                                             url='https://api.lemon.markets/rest/v1/data/instruments/',
                                                             fields={
