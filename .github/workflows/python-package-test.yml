@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,7 +25,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylama pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with pylama
-      run: pylama . -i 'E501' -l 'pycodestyle'
+    - name: Lint with pycodestyle
+      run: pylama / -i 'E501' -l 'pycodestyle'
     - name: Test with pytest
       run: pytest
