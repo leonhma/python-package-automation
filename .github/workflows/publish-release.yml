@@ -5,7 +5,7 @@ on:
     types: [ released ] 
     
 jobs:
-  build and upload:
+  build_and_upload:
     
     runs-on: ubuntu-latest
 
@@ -27,7 +27,7 @@ jobs:
         python setup.py sdist bdist_wheel
         twine upload dist/*
   
-  build and upload nightly:
+  build_and_upload_nightly:
 
     runs-on: ubuntu-latest
 
