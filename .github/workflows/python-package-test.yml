@@ -26,6 +26,4 @@ jobs:
         pip install pycodestyle pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with pycodestyle
-      run: pycodestyle --count --max-line-length 150 --ignore 'E5' --statistics lemon_markets/
-    - name: Test with pytest
-      run: pytest
+      run: pycodestyle . --count --max-line-length 150 --ignore 'E5' --statistics
