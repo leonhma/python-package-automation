@@ -3,15 +3,19 @@ name: pycodestyle linting
 on:
   push:
     branches: [ main ]
+    paths: 
+      - lemon_markets/**
   pull_request:
     branches: [ main ]
+    paths: 
+      - lemon_markets/**
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Python
+    - name: set up python
       uses: actions/setup-python@v2
       with: 
         python-version: '3.x'
