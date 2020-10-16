@@ -17,7 +17,8 @@ jobs:
           fetch-depth: 0
       - name: change setup.py contents
         run: |
-          sed -i -E '/version/s/version="\S*?"/version="${{ github.event.release.tag_name }}"/g' setup.py --debug
+          sed -i -E '/version/s/version="\S*?"/version="${{ github.event.release.tag_name }}"/g' setup.py
+          cat setup.py
           git config --local user.name "GitHub Action"
           python -c "print('${{ github.ref }}')"
           git commit -m 'Change version number' -a
