@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="lemon_markets",
-    version="ima be here forever",
+    version="<ima be here forever>",
     author="leonhma",
     author_email="leonhard.masche@gmail.com",
     description="lemon_markets is an (inofficial) python wrapper for various lemon.market endpoints.'\
