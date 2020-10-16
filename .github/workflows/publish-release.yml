@@ -6,7 +6,7 @@ on:
     
 jobs:
   
-  update-setup:
+  update-setup_py:
     
     runs-on: ubuntu-latest
     
@@ -27,7 +27,7 @@ jobs:
     
   build:
     
-    needs: update-setup
+    needs: update-setup_py
     
     runs-on: ubuntu-latest
 
@@ -53,8 +53,8 @@ jobs:
         
     - name: build
       run: |
-        python setup.py sdist bdist_wheel
         cat setup.py
+        python setup.py sdist bdist_wheel
         
     - name: upload build artifacts
       uses: actions/upload-artifact@v2
