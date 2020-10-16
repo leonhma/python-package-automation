@@ -26,8 +26,6 @@ jobs:
     - name: Modify setup.py version
       run: |
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
-        cat setup.py
-        cat ${{ github.event.release.note }}
         
     - name: Build
       run: |
