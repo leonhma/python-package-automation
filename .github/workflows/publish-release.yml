@@ -16,7 +16,6 @@ jobs:
       - name: change setup.py contents
         run: |
           sed -i -E '/version/s/version="\S*?"/version="${{ github.event.release.tag_name }}"/g' setup.py
-          cat setup.py
           
       - name: upload setup.py as artifact
         uses: actions/upload-artifact@v2
@@ -52,7 +51,6 @@ jobs:
         
     - name: build
       run: |
-        cat setup.py
         python setup.py sdist bdist_wheel
         
     - name: upload build artifacts
@@ -60,7 +58,6 @@ jobs:
       with:
         name: dist
         path: dist
-        retention-days: 5
    
   upload:
     
