@@ -49,7 +49,6 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: setup.py
-        path: setup.py
         
     - name: build
       run: |
