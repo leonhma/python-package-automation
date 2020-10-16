@@ -2,10 +2,33 @@ name: publish release to pypi
 
 on:
   release:
-    types: [ released ] 
+    types: [ published ] 
     
 jobs:
-  build_and_upload:
+  
+  update-setup:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: change setup.py contents
+        run: |
+          sed -i 's/(?<=version=")\S*?(?=")/${{ github.event.release.tag_name }}/g' setup.py
+          git config --local user.name "GitHub Action"
+          git commit -m 'Change version number' -a
+      - name: push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
+    
+  build:
+    
+    needs: update-setup
     
     runs-on: ubuntu-latest
 
@@ -18,16 +41,39 @@ jobs:
     - name: install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine
-    - name: build and publish
+        pip install setuptools wheel
+    - name: build
+      run: |
+        python setup.py sdist bdist_wheel
+   
+  upload:
+    
+    needs: build
+    
+    if: "!github.event.release.prerelease"
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install twine
+    - name: publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        python setup.py sdist bdist_wheel
         twine upload dist/*
   
-  build_and_upload_nightly:
+  upload-nightly:
+    
+    needs: build
 
     runs-on: ubuntu-latest
 
@@ -40,7 +86,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install twine
-    - name: also publish testpypi
+    - name: publish nightly
       env:
         TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
