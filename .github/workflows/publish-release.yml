@@ -27,7 +27,7 @@ jobs:
       run: |
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
         cat setup.py
-        cat ${{ github.event.release.comment }}
+        cat ${{ github.event.release.notes }}
         
     - name: Build
       run: |
