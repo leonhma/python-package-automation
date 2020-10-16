@@ -1,3 +1,5 @@
+#this file will never change its version. thats because a copy of this file is changed and afterwards deleted
+
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -5,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="lemon_markets",
-    version="0.0.1",
+    version="<ima be here forever>",
     author="leonhma",
     author_email="leonhard.masche@gmail.com",
     description="lemon_markets is an (inofficial) python wrapper for various lemon.market endpoints.'\
