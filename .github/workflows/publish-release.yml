@@ -26,6 +26,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+          force: true
     
   build:
     
@@ -51,7 +52,7 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         
-    - name: upload-build-artifacts
+    - name: upload build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: dist
@@ -80,7 +81,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install twine
         
-    - name: download-dist
+    - name: download build artifacts
       uses: actions/download-artifact@v2
       with:
         name: dist 
@@ -110,7 +111,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install twine
       
-    - name: download-dist
+    - name: download build artifacts
       uses: actions/download-artifact@v2
       with:
         name: dist
