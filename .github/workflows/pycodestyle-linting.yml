@@ -1,27 +1,32 @@
 name: pycodestyle linting
 
 on:
+  
   push:
+    
     branches: [ main ]
-    paths: 
-      - lemon_markets/**
+
   pull_request:
+    
     branches: [ main ]
-    paths: 
-      - lemon_markets/**
 
 jobs:
+
   lint:
+    
     runs-on: ubuntu-latest
 
     steps:
+    
     - uses: actions/checkout@v2
+      
     - name: set up python
       uses: actions/setup-python@v2
       with: 
         python-version: '3.x'
+    
     - name: running linter
       run: |
         python -m pip install --upgrade pip
         pip install pycodestyle
-        pycodestyle lemon_markets/ --count --max-line-length 150 --ignore 'E5' --statistics
+        pycodestyle . --count --max-line-length 150 --ignore 'E5' --statistics
