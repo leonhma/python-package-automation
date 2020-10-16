@@ -7,7 +7,7 @@ setuptools.setup(
     name="lemon_markets",
     version="0.0.1",
     author="leonhma",
-    author_email="author@example.com",
+    author_email="leonhard.masche@gmail.com",
     description="lemon_markets is an (inofficial) python wrapper for various lemon.market endpoints.'\
         ' This includes a WebSocket client based on callbacks and an easy way to acces account and intraday data.",
     long_description=long_description,
@@ -15,12 +15,10 @@ setuptools.setup(
     url="https://github.com/leonhma/lemon_markets",
     packages=setuptools.find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        "Operating System :: OS Independent",
-        "Natural Language :: English"
+        "Operating System :: OS Independent"
     ],
-    python_requires='>=3.6',
     install_requires=[
         'datetime',
         'time',
