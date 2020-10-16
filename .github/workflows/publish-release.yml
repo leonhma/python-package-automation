@@ -25,7 +25,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: refs/main
           force: true
     
   build:
@@ -84,7 +84,8 @@ jobs:
     - name: download build artifacts
       uses: actions/download-artifact@v2
       with:
-        name: dist 
+        name: dist
+        path: dist/
         
     - name: publish
       env:
@@ -115,6 +116,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: dist
+        path: dist/
         
     - name: publish nightly
       env:
