@@ -24,7 +24,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+          branch: ${{ github.ref }}
     
   build:
     
@@ -34,17 +34,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      
     - name: set up python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+        
     - name: install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel
+        
     - name: build
       run: |
         python setup.py sdist bdist_wheel
+        
+    - name: upload-build-artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: dist
+        retention-days: 5
    
   upload:
     
@@ -55,15 +65,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - uses: actions/checkout@v2
+      
     - name: set up python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+        
     - name: install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install twine
+        
+    - name: download-dist
+      uses: actions/download-artifact@v2
+      with:
+        name: dist 
+        
     - name: publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
@@ -78,14 +97,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - name: set up python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+      
     - name: install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install twine
+      
+    - name: download-dist
+      uses: actions/download-artifact@v2
+      with:
+        name: dist
+        
     - name: publish nightly
       env:
         TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
