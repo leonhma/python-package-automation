@@ -19,7 +19,7 @@ jobs:
         run: |
           sed -i -E '/version/s/version="\S*?"/version="${{ github.event.release.tag_name }}"/g' setup.py
           git config --local user.name "GitHub Action"
-          python -c 'print('${{ github.ref }}')'
+          python -c "print('${{ github.ref }}')"
           git commit -m 'Change version number' -a
       - name: push changes
         uses: ad-m/github-push-action@master
