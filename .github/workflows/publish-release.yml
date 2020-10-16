@@ -25,8 +25,9 @@ jobs:
         
     - name: Modify setup.py version
       run: |
-        sed -i -E 's/version="\S*?"/version="${{ github.event.release.tag_name }}"/g' setup.py
+        sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
         cat setup.py
+        cat ${{ github.event.release.comment }}
         
     - name: Build
       run: |
@@ -35,11 +36,11 @@ jobs:
     - name: Publish to test-pypi
       uses: pypa/gh-action-pypi-publish@master
       with:
-        password: ${{ secrets.TEST_PYPI_PASSWD  }}
+        password: ${{ secrets.TEST_PYPI_PASSWD }}
         repository_url: https://test.pypi.org/legacy/
         
     - name: Publish to pypi
       if: "!github.event.release.prerelease"
       uses: pypa/gh-action-pypi-publish@master
       with:
-        password: ${{ secrets.PYPI_PASSWD  }}
+        password: ${{ secrets.PYPI_PASSWD }}
