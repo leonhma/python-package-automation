@@ -1,4 +1,4 @@
-#this file will never change its version. thats because a copy of this file is changed and afterwards deleted
+# this file will never change its version. thats because a copy of this file is changed and afterwards deleted
 
 import setuptools
 
