@@ -67,7 +67,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        THEME=$(grep -f ./docs/conf.py -oP '(?<=html_theme = ").+?(?=")')
+        THEME=$(grep -oP -f '(?<=html_theme = ").+?(?=")' ./docs/conf.py)
         python -m pip install --upgrade pip
         pip install sphinx $THEME
 
