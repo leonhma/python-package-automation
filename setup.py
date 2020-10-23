@@ -6,12 +6,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="lemon_markets",
-    version="<ima be here forever>",
-    author="leonhma",
+    name="<>",
+    version="<>",
+    author="<>",
     author_email="leonhard.masche@gmail.com",
-    description="lemon_markets is an (inofficial) python wrapper for various lemon.market endpoints.'\
-        ' This includes a WebSocket client based on callbacks and an easy way to acces account and intraday data.",
+    description="example package",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/leonhma/lemon_markets",
