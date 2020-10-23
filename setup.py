@@ -6,9 +6,9 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="<>",
+    name="example_package",
     version="<>",
-    author="<>",
+    author="leonhma",
     author_email="leonhard.masche@gmail.com",
     description="example package",
     long_description=long_description,
@@ -21,10 +21,7 @@ setuptools.setup(
         "Operating System :: OS Independent"
     ],
     install_requires=[
-        'datetime',
-        'time',
         'urllib3',
-        'websocket',
-        'multiprocessing'
+        'websocket'
     ]
 )
