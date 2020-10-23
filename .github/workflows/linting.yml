@@ -1,15 +1,15 @@
-name: pycodestyle linting
+name: pylama linting
 
 on:
   
   push:
     
-    paths:
-      - '**.py'
-
     ignore-paths:
       - 'setup.py'
       - 'conf.py'
+      
+    paths:
+      - '**.py'
 
   pull_request:
     
