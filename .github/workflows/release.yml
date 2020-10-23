@@ -33,7 +33,7 @@ jobs:
 
     - name: Upload release assets
       run: |
-        echo ${{secrets.GITHUB_TOKEN}}
+        echo ${{secrets.GITHUB_TOKEN}} > GITHUB_TOKEN
         curl -O https://gist.githubusercontent.com/zonca/52857f2425942725fb74595c4f8600e9/raw/b5d670d7bdb67695a8774223197595b17f6a03e3/upload_release_assets.py
         python upload_release_assets.py ${{ github.event.release.tag_name }} dist/*.*
 
