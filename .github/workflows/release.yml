@@ -31,23 +31,10 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-    - uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./dist/*.whl
-        asset_name: example_package.whl
-        asset_content_type: application/x-wheel+zip
-        
-    - uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./dist/*.gz
-        asset_name: example_package.tar.gz
-        asset_content_type: application/gzip
+    - name: Upload release assets
+      run: |
+        curl -O https://gist.githubusercontent.com/zonca/52857f2425942725fb74595c4f8600e9/raw/b5d670d7bdb67695a8774223197595b17f6a03e3/upload_release_assets.py
+        python upload_release_asset.py ${{ github.event.release.tag_name }} dist/*.*
 
     - name: Publish to test-pypi
       uses: pypa/gh-action-pypi-publish@master
@@ -68,6 +55,10 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
