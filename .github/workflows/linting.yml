@@ -41,4 +41,5 @@ jobs:
         pip install pylama
     
     - name: Linting
+      run: |
         pylama -i E501 --skip conf.py,setup.py
