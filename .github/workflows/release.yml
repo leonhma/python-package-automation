@@ -38,6 +38,7 @@ jobs:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./dist/*.whl
         asset_name: example_package.whl
+        asset_content_type: application/x-wheel+zip
         
     - uses: actions/upload-release-asset@v1
       env:
@@ -46,6 +47,7 @@ jobs:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./dist/*.gz
         asset_name: example_package.tar.gz
+        asset_content_type: application/gzip
 
     - name: Publish to test-pypi
       uses: pypa/gh-action-pypi-publish@master
@@ -69,9 +71,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        THEME=$(grep -oP -f ./docs/conf.py '(?<=html_theme = \").+?(?=\")')
+        THEME=$(pcgrep -f ./docs/conf.py -e'(?<=html_theme = \").+?(?=\") -M -o -q')
         python -m pip install --upgrade pip
-        pip install sphinx $THEME
+        pip install sphinx ${THEME}
 
     - name: Change conf.py parameters
       run: |
