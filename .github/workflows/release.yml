@@ -37,7 +37,7 @@ jobs:
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./dist/*.whl
-        asset-name: example_package.whl
+        asset_name: example_package.whl
         
     - uses: actions/upload-release-asset@v1
       env:
@@ -69,7 +69,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        THEME=$(grep -oP -f ./docs/conf.py '(?<=html_theme = ").+?(?=")')
+        THEME=$(grep -oP -f ./docs/conf.py '(?<=html_theme = \").+?(?=\")')
         python -m pip install --upgrade pip
         pip install sphinx $THEME
 
