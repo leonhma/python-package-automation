@@ -34,7 +34,7 @@ jobs:
     - name: Upload release assets
       run: |
         curl -O https://gist.githubusercontent.com/zonca/52857f2425942725fb74595c4f8600e9/raw/b5d670d7bdb67695a8774223197595b17f6a03e3/upload_release_assets.py
-        python upload_release_asset.py ${{ github.event.release.tag_name }} dist/*.*
+        python upload_release_assets.py ${{ github.event.release.tag_name }} dist/*.*
 
     - name: Publish to test-pypi
       uses: pypa/gh-action-pypi-publish@master
@@ -62,6 +62,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        apt-get install pcgrep
         THEME=$(pcgrep -f ./docs/conf.py -e'(?<=html_theme = \").+?(?=\") -M -o -q')
         python -m pip install --upgrade pip
         pip install sphinx ${THEME}
