@@ -82,7 +82,7 @@ jobs:
         git checkout -b gh-pages
         sphinx-build -M html docs/ build/
         mkdir html
-        mv docs/build/html/ html/
+        mv build/html/ html/
         rm -f -r !html/**
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
