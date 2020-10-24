@@ -82,7 +82,7 @@ jobs:
         git checkout -b gh-pages
         cd docs/
         sphinx-build -M html . build
-        mkdir tmp
+        mkdir html
         mv ./build/html/* ./html/
         rm -f -r !./html/**
         git add -A
