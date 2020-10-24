@@ -26,6 +26,10 @@ jobs:
     - name: Modify setup.py version
       run: |
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
+        sed -i -E 's|name=\".*?\"|name="${{ github.event.repository.name }}"|g' setup.py
+        sed -i -E 's|author=\".*?\"|author="${{ github.event.release.tag_name }}"|g' setup.py
+        DESCRIPTION=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.event.release.repository.owner.login }}/${{ github.event.release.repository.name }} | jq '.description')
+        sed -i -E 's|description=\".*?\"|description="${DESCRIPTION}"|g' setup.py
         
     - name: Build
       run: |
@@ -40,12 +44,12 @@ jobs:
 
     - name: Publish to test-pypi
       run: |
-        twine upload dist/* --repository testpypi -u __token__ -p ${{ secrets.TEST_PYPI_PASSWD }} --non-interactive --verbose
+        twine upload dist/* --repository testpypi -u __token__ -p ${{ secrets.TEST_PYPI_PASSWD }} --non-interactive
         
     - name: Publish to pypi
       if: "!github.event.release.prerelease"
       run: |
-        twine upload dist/* --repository pypi -u __token__ -p ${{ secrets.PYPI_PASSWD }} --non-interactive --verbose
+        twine upload dist/* --repository pypi -u __token__ -p ${{ secrets.PYPI_PASSWD }} --non-interactive
     
   update-gh-pages:
 

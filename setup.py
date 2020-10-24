@@ -1,4 +1,5 @@
-# this file will never change its version. thats because a copy of this file is changed and afterwards deleted
+# this file contains some placeholders
+# that are changed in a local copy if a release is made
 
 import setuptools
 
@@ -6,11 +7,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="example_package",
-    version="<>",
-    author="leonhma",
-    author_email="leonhard.masche@gmail.com",
-    description="example package",
+    name="<>",  # placeholder (name of repo)
+    version="<>",  # placeholder (tag of release)
+    author="<>",  # placeholder (owner of repo)
+    author_email="none@none.com",
+    description="<>",  # placeholder (description of repo)
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/leonhma/lemon_markets",
