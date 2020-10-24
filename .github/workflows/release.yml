@@ -84,7 +84,7 @@ jobs:
         sphinx-build -M html . build
         mkdir tmp
         mv ./build/html/* ./tmp
-        rm -f !./tmp/**)
+        rm -f !./tmp/**
         mv ./tmp/* .
         rm -f ./tmp
         git add -A
