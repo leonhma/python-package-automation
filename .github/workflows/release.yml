@@ -39,12 +39,12 @@ jobs:
 
     - name: Publish to test-pypi
       run: |
-        twine upload dist/* --repository testpypi -u __token__ -p pypi_${{ secrets.TEST_PYPI_PASSWD}} --non-interactive --verbose
+        twine upload dist/* --repository testpypi -u __token__ -p pypi-${{ secrets.TEST_PYPI_PASSWD }} --non-interactive --verbose
         
     - name: Publish to pypi
       if: "!github.event.release.prerelease"
       run: |
-        twine upload dist/* --repository pypi -u __token__ -p pypi_${{ secrets.PYPI_PASSWD}} --non-interactive --verbose
+        twine upload dist/* --repository pypi -u __token__ -p pypi-${{ secrets.PYPI_PASSWD }} --non-interactive --verbose
     
   update-gh-pages:
 
@@ -60,7 +60,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        THEME=$(grep -f ./docs/conf.py -oqP --regexp='(?<=html_theme\s=\s").+?(?=")')
+        THEME=$(grep -f ./docs/conf.py -oqP --regexp='(?<=html_theme\s=\s\").+?(?=\")')
         python -m pip install --upgrade pip
         pip install sphinx ${THEME}
 
