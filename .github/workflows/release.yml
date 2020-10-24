@@ -86,7 +86,7 @@ jobs:
         mv ./build/html/* ./tmp
         rm -f !./tmp/**
         mv ./tmp/* .
-        rm -f ./tmp
+        rm -f -r ./tmp
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
         git config --global user.name "leonhma"
