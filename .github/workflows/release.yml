@@ -81,13 +81,10 @@ jobs:
       run: |
         cd docs/
         sphinx-build -M html . build
-        cd ..
-
-    - name: Push to Github
-      uses: x-actions/gh-pages@release/v1
-      env:
-        GITHUB_EMAIL: "leonhard.masche@gmail.com"
-        GITHUB_USERNAME: "leonhma"
-        PUBLISH_REPO: https://${{ secrets.GitHub_PAT }}@github.com/${{ github.event.repository.owner.login }}/${{ github.event.repository.name}}.git
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: docs/build/html
+        cd build/html
+        git checkout -b gh-pages
+        git add -A
+        git config --global user.email "leonhard.masche@gmail.com"
+        git config --global user.name "leonhma"
+        git commit -m 'Updating page version (triggered by new release)'
+        git push origin gh-pages
