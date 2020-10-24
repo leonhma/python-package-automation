@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel
+        pip install setuptools wheel github
         
     - name: Modify setup.py version
       run: |
@@ -63,7 +63,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt-get install pcgrep
         THEME=$(grep -f ./docs/conf.py -e'(?<=html_theme = \").+?(?=\") -M -o -q')
         python -m pip install --upgrade pip
         pip install sphinx ${THEME}
