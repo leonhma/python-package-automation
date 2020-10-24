@@ -31,11 +31,11 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-    - name: Upload release assets
-      run: |
-        echo ${{secrets.GITHUB_TOKEN}} > GITHUB_TOKEN
-        curl -O https://gist.githubusercontent.com/zonca/52857f2425942725fb74595c4f8600e9/raw/b5d670d7bdb67695a8774223197595b17f6a03e3/upload_release_assets.py
-        python upload_release_assets.py ${{ github.event.release.tag_name }} dist/*.*
+    - uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'dist/*.*'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          release-tag: ${{ github.event.release.tag_name }}
 
     - name: Publish to test-pypi
       uses: pypa/gh-action-pypi-publish@master
