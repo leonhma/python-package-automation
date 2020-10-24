@@ -28,8 +28,7 @@ jobs:
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
         sed -i -E 's|name=\".*?\"|name="${{ github.event.repository.name }}"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.release.tag_name }}"|g' setup.py
-        DESCRIPTION=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.event.release.repository.owner.login }}/${{ github.event.release.repository.name }} | jq '.description')
-        sed -i -E 's|description=\".*?\"|description="'"$DESCRIPTION"'"|g' setup.py
+        sed -i -E 's|description=\".*?\"|description="${{ github.event.repository.description }}"|g' setup.py
         sed -i -E 's|url=\".*?\"|url="${{ github.event.release.html_url }}"|g' setup.py
         
     - name: Build
@@ -84,5 +83,7 @@ jobs:
         cd docs/
         sphinx-build -M dirhtml . build
         git add build/dirhtml/*
-        git commit -m 'Updating page version [triggered by new release]'
+        git config --global user.email "leonhard.masche@gmail.com"
+        git config --global user.name "leonhma"
+        git commit -m 'Updating page version (triggered by new release)'
         git push origin gh-pages

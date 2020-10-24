@@ -1,5 +1,5 @@
 Reference
 =========
 
-.. automodule:: example_package_r4and0m
+.. automodule:: python_package_automation
     :members:
