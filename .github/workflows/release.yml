@@ -71,9 +71,8 @@ jobs:
 
     - name: Change conf.py parameters
       run: |
-        RESULT=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.event.release.repository.owner.login }}/${{ github.event.release.repository.name }}/license | jq '.license.name')
         sed -i -E 's|project = ".*?"|project = "${{ github.event.repository.name }}"|g' docs/conf.py
-        sed -i -E 's|copyright = ".*?"|copyright = "'"$RESULT"'"|g' docs/conf.py
+        sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license }}"|g' docs/conf.py
         sed -i -E 's|author = ".*?"|author = "${{ github.event.repository.owner.login }}"|g' docs/conf.py
         sed -i -E 's|release = ".*?"|release = "${{ github.event.release.tag_name }}"|g' docs/conf.py
         cat docs/conf.py
@@ -81,9 +80,14 @@ jobs:
     - name: Build using sphinx
       run: |
         cd docs/
-        sphinx-build -M dirhtml . build
-        git add build/dirhtml/*
-        git config --global user.email "leonhard.masche@gmail.com"
-        git config --global user.name "leonhma"
-        git commit -m 'Updating page version (triggered by new release)'
-        git push origin gh-pages
+        sphinx-build -M html . build
+        cd ..
+
+    - name: Push to Github
+      uses: x-actions/gh-pages@release/v1
+      env:
+        GITHUB_EMAIL: "leonhard.masche@gmail.com"
+        GITHUB_USERNAME: "leonhma"
+        PUBLISH_REPO: https://${{ secrets.GitHub_PAT }}@github.com/${{ github.event.repository.owner.login }}/${{ github.event.repository.name}}.git
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: docs/build/html
