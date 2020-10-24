@@ -31,9 +31,10 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-    - uses: AButler/upload-release-assets@v2.0
+    - name: Upload release assets
+      uses: AButler/upload-release-assets@v2.0
       with:
-        files: 'dist/*.*'
+        files: dist/*
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         release-tag: ${{ github.event.release.tag_name }}
 
@@ -60,7 +61,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        THEME=$(grep -f ./docs/conf.py -oqP --regexp='(?<=html_theme\s=\s\").+?(?=\")')
+        THEME=$(grep -oP '(?<=html_theme = ").+?(?=")' conf.py)
         python -m pip install --upgrade pip
         pip install sphinx ${THEME}
 
