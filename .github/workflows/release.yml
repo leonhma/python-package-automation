@@ -76,10 +76,12 @@ jobs:
         sed -i -E 's|copyright = \".*?\"|copyright = "$RESULT"|g' docs/conf.py
         sed -i -E 's|author = \".*?\"|author = "${{ github.event.release.repository.owner.login }}"|g' docs/conf.py
         sed -i -E 's|release = \".*?\"|release = "${{ github.event.release.tag_name }}"|g' docs/conf.py
+        cat docs/conf.py
 
     - name: Build using sphinx
       run: |
-        sphinx-build -M html ./docs/ build
-        git add ./build/dirhtml/*
+        cd docs/
+        sphinx-build -M html . build
+        git add build/dirhtml/*
         git commit -m 'Updating page version [triggered by new release]'
         git push origin gh-pages
