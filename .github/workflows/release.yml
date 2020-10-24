@@ -82,6 +82,7 @@ jobs:
         git checkout -b gh-pages
         cd docs/
         sphinx-build -M html . build
+        mkdir tmp
         mv ./build/html/* ./tmp
         rm -f !(./tmp/**)
         mv ./tmp/* .
