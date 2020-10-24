@@ -29,7 +29,7 @@ jobs:
         sed -i -E 's|name=\".*?\"|name="${{ github.event.repository.name }}"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.release.tag_name }}"|g' setup.py
         DESCRIPTION=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.event.release.repository.owner.login }}/${{ github.event.release.repository.name }} | jq '.description')
-        sed -i -E 's|description=\".*?\"|description="${DESCRIPTION}"|g' setup.py
+        sed -i -E 's|description=\".*?\"|description="DESCRIPTION"|g' setup.py
         
     - name: Build
       run: |
@@ -67,13 +67,13 @@ jobs:
       run: |
         THEME=$(grep -oP '(?<=html_theme = ").+?(?=")' docs/conf.py)
         python -m pip install --upgrade pip
-        pip install sphinx ${THEME}
+        pip install sphinx $THEME
 
     - name: Change conf.py parameters
       run: |
         RESULT=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.event.release.repository.owner.login }}/${{ github.event.release.repository.name }}/license | jq '.license.name')
         sed -i -E 's|project = \".*?\"|project = "${{ github.event.release.repository.name }}"|g' docs/conf.py
-        sed -i -E 's|copyright = \".*?\"|copyright = "${{RESULT}}"|g' docs/conf.py
+        sed -i -E 's|copyright = \".*?\"|copyright = "$RESULT"|g' docs/conf.py
         sed -i -E 's|author = \".*?\"|author = "${{ github.event.release.repository.owner.login }}"|g' docs/conf.py
         sed -i -E 's|release = \".*?\"|release = "${{ github.event.release.tag_name }}"|g' docs/conf.py
 
