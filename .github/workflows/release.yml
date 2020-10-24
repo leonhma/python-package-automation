@@ -71,10 +71,10 @@ jobs:
 
     - name: Change conf.py parameters
       run: |
-        sed -i -E 's|project = ".*?"|project = "${{ github.event.repository.name }}"|g' docs/conf.py
-        sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' docs/conf.py
-        sed -i -E 's|author = ".*?"|author = "${{ github.event.repository.owner.login }}"|g' docs/conf.py
-        sed -i -E 's|release = ".*?"|release = "${{ github.event.release.tag_name }}"|g' docs/conf.py
+        sed -i -E 's|project = ".*?"|project = "${{ github.event.repository.name }}"|g' documentation/conf.py
+        sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' documentation/conf.py
+        sed -i -E 's|author = ".*?"|author = "${{ github.event.repository.owner.login }}"|g' documentation/conf.py
+        sed -i -E 's|release = ".*?"|release = "${{ github.event.release.tag_name }}"|g' documentation/conf.py
         cat docs/conf.py
 
     - name: Build using sphinx
