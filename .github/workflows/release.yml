@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel
+        pip install setuptools wheel twine
         
     - name: Modify setup.py version
       run: |
@@ -38,16 +38,13 @@ jobs:
         release-tag: ${{ github.event.release.tag_name }}
 
     - name: Publish to test-pypi
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.TEST_PYPI_PASSWD }}
-        repository_url: https://test.pypi.org/legacy/
+      run: |
+        twine upload dist/* --repository testpypi -u __token__ -p pypi_${{ secrets.TEST_PYPI_PASSWD}} --non-interactive --verbose
         
     - name: Publish to pypi
       if: "!github.event.release.prerelease"
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.PYPI_PASSWD }}
+      run: |
+        twine upload dist/* --repository pypi -u __token__ -p pypi_${{ secrets.PYPI_PASSWD}} --non-interactive --verbose
     
   update-gh-pages:
 
@@ -63,7 +60,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        THEME=$(grep -f ./docs/conf.py -oqP --regexp='(?<=html_theme = ").+?(?=")')
+        THEME=$(grep -f ./docs/conf.py -oqP --regexp='(?<=html_theme\s=\s").+?(?=")')
         python -m pip install --upgrade pip
         pip install sphinx ${THEME}
 
