@@ -3,10 +3,9 @@ name: pylama linting
 on:
   
   push:
-    
-    ignore-paths:
-      - 'setup.py'
-      - 'conf.py'
+
+    ignore-branches:
+      - gh-pages
       
     paths:
       - '**.py'
@@ -16,9 +15,8 @@ on:
     paths:
       - '**.py'
 
-    ignore-paths:
-      - 'setup.py'
-      - 'conf.py'
+    ignore-branches:
+      - gh-pages
 
 jobs:
 

@@ -83,10 +83,8 @@ jobs:
         cd docs/
         sphinx-build -M html . build
         mkdir tmp
-        mv ./build/html/* ./tmp
-        rm -f !./tmp/**
-        mv ./tmp/* .
-        rm -f -r ./tmp
+        mv ./build/html/* ./html/
+        rm -f -r !./html/**
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
         git config --global user.name "leonhma"
