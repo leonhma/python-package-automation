@@ -80,11 +80,10 @@ jobs:
     - name: Build using sphinx
       run: |
         git checkout -b gh-pages
-        cd docs/
-        sphinx-build -M html . build
+        sphinx-build -M html docs/ build/
         mkdir html
-        mv ./build/html/* ./html/
-        rm -f -r !./html/**
+        mv docs/build/html/ html/
+        rm -f -r !html/**
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
         git config --global user.name "leonhma"
