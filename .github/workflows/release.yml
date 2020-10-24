@@ -80,10 +80,9 @@ jobs:
     - name: Build using sphinx
       run: |
         git checkout -b gh-pages
-        sphinx-build -M html docs/ build/
-        mkdir html
-        mv build/html/ .
-        find . -mindepth 1 ! -regex '^./html\(/.*\)?' ! -regex '^./.git\(/.*\)?' -delete
+        sphinx-build -M html documentation/ build/
+        mv build/html/ docs/
+        find . -mindepth 1 ! -regex '^./docs\(/.*\)?' ! -regex '^./.git\(/.*\)?' -delete
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
         git config --global user.name "leonhma"
