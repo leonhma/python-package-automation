@@ -39,12 +39,12 @@ jobs:
 
     - name: Publish to test-pypi
       run: |
-        twine upload dist/* --repository testpypi -u __token__ -p pypi-${{ secrets.TEST_PYPI_PASSWD }} --non-interactive --verbose
+        twine upload dist/* --repository testpypi -u __token__ -p ${{ secrets.TEST_PYPI_PASSWD }} --non-interactive --verbose
         
     - name: Publish to pypi
       if: "!github.event.release.prerelease"
       run: |
-        twine upload dist/* --repository pypi -u __token__ -p pypi-${{ secrets.PYPI_PASSWD }} --non-interactive --verbose
+        twine upload dist/* --repository pypi -u __token__ -p ${{ secrets.PYPI_PASSWD }} --non-interactive --verbose
     
   update-gh-pages:
 
