@@ -83,7 +83,7 @@ jobs:
         cd docs/
         sphinx-build -M html . build
         mv build/html/* .
-        find . ! -name html -max-depth=1 -delete
+        find . ! -name html -maxdepth=1 -delete
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
         git config --global user.name "leonhma"
