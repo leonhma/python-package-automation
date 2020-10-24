@@ -82,8 +82,8 @@ jobs:
         git checkout -b gh-pages
         sphinx-build -M html docs/ build/
         mkdir html
-        mv build/html/ html/
-        rm -f -r !html/**
+        mv build/html/ .
+        find . -mindepth 1 ! -regex '^./html\(/.*\)?' -delete
         git add -A
         git config --global user.email "leonhard.masche@gmail.com"
         git config --global user.name "leonhma"
