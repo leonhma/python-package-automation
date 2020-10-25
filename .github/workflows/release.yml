@@ -73,8 +73,11 @@ jobs:
         git checkout -b gh-pages
         sphinx-build -M html docs/ build/
         find . -mindepth 1 ! -regex '^./build\(/.*\)?' ! -regex '^./.git\(/.*\)?' -delete
-        find build/* -maxdepth 1 -mindepth 1 -not -name build -exec mv '{}' .
+        find build/* -maxdepth 1 -mindepth 1 -not -name build -exec mv '{}' . \;
         rm -rf build/
+
+        touch .nojekyll
+
         git add -A
         git config --global user.email "none@none.com"
         git config --global user.name "release bot"
