@@ -1,8 +1,8 @@
-This is a templete that contains workflows to automatically update documentation using sphinx, push it to github pages, upload release binaries as assets and do linting using pylama
+This is a template that contains workflows to automatically update documentation using sphinx, push it to github pages, upload release binaries as assets and do linting using pylama
 
-## How to use this template
+# How to use this template
 
-# Setup
+## Setup
 
 * First, think of a name for your package. Make shure it's not yet taken on pypi and testpypi
 * Second, click 'use this template' in the upper right corner
@@ -12,7 +12,7 @@ This is a templete that contains workflows to automatically update documentation
 * Now, go to the settings tab and scroll down to the github pages section. Select gh-pages as the branch to host your docs (it has just been created in the setup workflow) and choose root as the directory containing your docs
 
 
-# Automated distribution on release
+## Automated distribution on release
 
 * Sign up for an account at testpypi and pypi
 * Under account settings (in your pypi account) select API tokens and create a new one with the **permission to upload to the entire account**
