@@ -12,14 +12,14 @@ jobs:
 
     - name: Change files
       run: |
-        PACKAGE_NAME=$(echo "{{ github.event.repository.name }}" | sed -r 's|-|_|g')
+        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | sed -r 's|-|_|g')
 
-        sed -i -E 's|name=\".*?\"|name="'"$PACKAGE_NAME"'""//-/_}"|g' setup.py
+        sed -i -E 's|name=\".*?\"|name="'"$PACKAGE_NAME"'"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.repository.owner.login }}"|g' setup.py
         sed -i -E 's|description=\".*?\"|description="${{ github.event.repository.description }}"|g' setup.py
         sed -i -E 's|url=\".*?\"|url="${{ github.event.repository.html_url }}"|g' setup.py
 
-        sed -i -E 's|project = ".*?"|project = "'"$PACKAGE_NAME"'"//-/_}"|g' docs/conf.py
+        sed -i -E 's|project = ".*?"|project = "'"$PACKAGE_NAME"'"|g' docs/conf.py
         sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' docs/conf.py
         sed -i -E 's|author = ".*?"|author = "${{ github.event.repository.owner.login }}"|g' docs/conf.py
 
