@@ -19,5 +19,6 @@ This is a template that contains workflows to automatically update documentation
 * Go to the settings page in your repo and select secrets, click 'add secret' and paste your token from testpypi into a secret named 'TEST_PYPI_PASSWD' and the one from pypi to 'PYPI_PASSWD'
 * You are now able to create a release. Choose a tag name that contains only alphanumericals, underscores and dots. If you select 'This is a prerelease', your package will only be uploaded to testpypi, if you don't, it will be uploaded to both
 * If this was your first release, go to the settings tab and scroll down to the github pages section. Select gh-pages as the branch to host your docs (it has just been created in the release workflow) and choose root as the directory containing your docs
+* You should now see github-pages under the environments in the sidebar. Click on it and select 'View deployment' this will take you to your ready-made website. If it says 404, just give it 2 minutes and retry
 
 **Feel free to now edit setup.py, docs/*, readme.md and the folder named like your repo to your liking**
