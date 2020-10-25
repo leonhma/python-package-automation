@@ -3,26 +3,27 @@
 
 import setuptools
 
-with open("README.md", "r") as fh:
+README = 'README.md'  # the path to your readme file
+README_MIME = 'text/markdown'  # it's mime type
+
+with open(README, "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="<>",  # placeholder (name of repo)
+    name="<setup>",  # placeholder (name of repo)
     version="<>",  # placeholder (tag of release)
-    author="<>",  # placeholder (owner of repo)
-    author_email="none@none.com",
-    description="<>",  # placeholder (description of repo)
+    author="<setup>",  # placeholder (owner of repo)
+    description="<setup>",  # placeholder (description of repo)
+    url="<setup>",  # placeholder (url of repo)
     long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://github.com/leonhma/lemon_markets",
+    long_description_content_type=README_MIME,
     packages=setuptools.find_packages(),
-    classifiers=[
+    author_email="none@none.com",  # the email of the repo owner
+    classifiers=[  # add some info about you package
         "Programming Language :: Python",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: Other/Proprietary License",
         "Operating System :: OS Independent"
     ],
-    install_requires=[
-        'urllib3',
-        'websocket'
+    install_requires=[  # add required pypi packages here
     ]
 )

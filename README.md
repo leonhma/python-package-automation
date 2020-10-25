@@ -8,7 +8,8 @@ This is a template that contains workflows to automatically update documentation
 * Second, click 'use this template' in the upper right corner
 * Name your repository the name you have just thought of (dashes will be replaced with underscores) and choose a license and description for it. This will enable the setup workflow to automatically fill out the copyright field in setup.py
 * Next, in your newly created repository, go to the actions tab, select 'setup' and click on 'run workflow'
-* Select your main branch and click 'run'
+* Select your main branch and click 'run workflow'
+* You should now see a job 'setup' pop up (after ca. 10 sec, you might have to refresh the page). Wait for it to finish and move on
 
 
 ## Automated distribution on release
