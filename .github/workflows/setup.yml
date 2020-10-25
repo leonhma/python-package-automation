@@ -23,7 +23,7 @@ jobs:
         sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' docs/conf.py
         sed -i -E 's|author = ".*?"|author = "${{ github.event.repository.owner.login }}"|g' docs/conf.py
 
-        sed -i -E "s|automodule\:\: .+?$|automodule\:\: ""$PACKAGE_NAME""|gm" docs/index.rst
+        sed -i -E "s|automodule\:\: .+?$|automodule\:\: ""$PACKAGE_NAME""|gm" docs/reference.rst
         sed -i -E "s|Welcome to .+?'s|Welcome to ""$PACKAGE_NAME""'s|g" docs/index.rst
 
         mv python_package_automation/ "$PACKAGE_NAME"/
