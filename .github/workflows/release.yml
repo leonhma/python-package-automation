@@ -71,10 +71,10 @@ jobs:
     - name: Build using sphinx
       run: |
         git checkout -b gh-pages
-        sphinx-build -M html docs/ build/
-        find . -mindepth 1 ! -regex '^./build\(/.*\)?' ! -regex '^./.git\(/.*\)?' -delete
-        mv build/* ./
-        rm -rf build/
+        sphinx-build -M html docs/ build_xxx/
+        find . -mindepth 1 ! -regex '^./build_xxx\(/.*\)?' ! -regex '^./.git\(/.*\)?' -delete
+        mv build_xxx/* ./
+        rm -rf build_xxx/
         git add -A
         git config --global user.email "none@none.com"
         git config --global user.name "release bot"
