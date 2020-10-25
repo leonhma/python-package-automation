@@ -1,0 +1,11 @@
+name: test
+
+on:
+  create
+
+jobs:
+  echo:
+    steps:
+      - name: echo
+        run: |
+          echo hi
