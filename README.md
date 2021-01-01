@@ -10,6 +10,7 @@ This is a template that contains workflows to automatically update documentation
 * Next, in your newly created repository, go to the actions tab, select 'setup' and click on 'run workflow'
 * Select your main branch and click 'run workflow'
 * You should now see a job 'setup' pop up (after ca. 10 sec, you might have to refresh the page). Wait for it to finish and move on
+
 **Feel free to now edit setup.py, docs/*, readme.md and the folder named like your repo to your liking**
 
 ## Automated distribution on release
