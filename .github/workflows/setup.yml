@@ -33,7 +33,6 @@ jobs:
     - name: Push changes to github
       run: |
         git add -A
-        git config --global user.email "none@none.com"
-        git config --global user.name "setup bot"
+        git config --global user.name "${{ github.event.sender.login }}"
         git commit -m 'Setting up repo'
         git push origin ${{ github.ref }}
