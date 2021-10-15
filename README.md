@@ -29,5 +29,5 @@ This is a template that contains workflows to automatically update documentation
 
 ## Automatic unittesting
 
-* If you're familiar with the python testing framework unittests, this is for you.
-* Write you test like you normally would. With every push, your tests are run against the code you wrote. If your project depends on libraries, you can add a `requirements.txt` file, or just let `setup.py` do it's thing.
+* If you're familiar with the python testing framework `unittest`, this is for you.
+* Write your test like you normally would. With every push, your tests are run against the code you wrote. If your project depends on libraries, you can add a `requirements.txt` file, or just let `setup.py` do it's thing.
