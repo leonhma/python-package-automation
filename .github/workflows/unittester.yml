@@ -1,4 +1,4 @@
-name: unittester
+name: tests
 
 on:
   push:
@@ -6,12 +6,44 @@ on:
      - "docs/**"
 
 jobs:
+  start:
+    if: '[! -f ".github/workflows/setup.yml"] && [-f "**/test*.py"]'
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      # version: [...]
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - name: Install pip & vermin
+        run: |
+          pip install --upgrade pip
+          pip install vermin
+      - id: set-matrix
+        run: |
+          versions=('3.4' '3.5' '3.6' '3.7' '3.8' '3.9' '3.10')
+          vermin=$(vermin --no-parse-comments -q  --no-config .)
+          start=false
+          matrix=()
+          for version in versions; do
+            if [[ "vermin" == *"version"* ]]; then
+              start=true
+            fi
+            start && matrix += version
+          done
+          echo "::set-output name=matrix::${{ toJson(matrix) }}
+
+
+        
+        
   test:
-    if: test -f ".github/workflows/setup.yml" == false && test -f "**/test*.py"
+    needs: start
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['3.6', '3.7', '3.8', '3.9', '3.10']
+        version: ${{ fromJson(needs.start.outputs.matrix) }}
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
@@ -42,6 +74,7 @@ jobs:
           name: Unittest Results (Python ${{ matrix.version }})
           path: results.xml
           retention-days: 1
+
   publish-test-results:
     name: "Publish unittest results"
     needs: test
