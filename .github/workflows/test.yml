@@ -7,7 +7,7 @@ on:
 
 jobs:
   start:
-    if: ${{ hashFiles('.github/workflow/setup.yml') == '' && hasFiles('**/test*.py') != ''}}
+    if: ${{ always() && hashFiles('.github/workflow/setup.yml') == '' && hasFiles('**/test*.py') != ''}}
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
