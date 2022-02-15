@@ -26,26 +26,32 @@ jobs:
           if [! -f '.github/workflows/setup.yml'] && [-f '**/test*.py']; then
             echo "::set-output name=continue::true"
           else
-            echo "::set-output name=continue::false"
+            echo "::set-output name=continue::true"
           fi
       - id: set-matrix
-        if: ${{ steps.continue.outputs.continue }}
+        if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
           versions=('3.4' '3.5' '3.6' '3.7' '3.8' '3.9' '3.10')
           vermin=$(vermin --no-parse-comments -q  --no-config .)
           start=false
           matrix=()
+          echo "$versions"
+          echo "$vermin"
+          echo "$start"
+          echo "$matrix"
           for version in versions; do
             if "$vermin" == *"$version"* ]]; then
               start=true
             fi
             start && matrix += version
+            echo "$matrix"
           done
+          echo "$matrix"
           echo "::set-output name=matrix::${{ toJson(matrix) }}
         
   test:
     needs: start
-    if: ${{ needs.start.outputs.continue }}
+    if: ${{ fromJson(needs.start.outputs.continue) }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
