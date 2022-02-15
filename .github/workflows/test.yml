@@ -7,10 +7,10 @@ on:
 
 jobs:
   start:
-    if: test -f "**/test*.py"
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+      continue: ${{ steps.continue.outputs.continue}}
     steps:
       # version: [...]
       - uses: actions/checkout@v2
@@ -21,7 +21,15 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install vermin
+      - id: continue
+        run: |
+          if [! -f '.github/workflows/setup.yml'] && [-f '**/test*.py']; then
+            echo "::set-output name=continue::true"
+          else
+            echo "::set-output name=continue::false"
+          fi
       - id: set-matrix
+        if: ${{ steps.continue.outputs.continue }}
         run: |
           versions=('3.4' '3.5' '3.6' '3.7' '3.8' '3.9' '3.10')
           vermin=$(vermin --no-parse-comments -q  --no-config .)
@@ -37,6 +45,7 @@ jobs:
         
   test:
     needs: start
+    if: ${{ needs.start.outputs.continue }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
