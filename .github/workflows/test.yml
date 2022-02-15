@@ -45,7 +45,7 @@ jobs:
             $START && MATRIX+=($VERSION)
           done
           echo "$MATRIX"
-          echo "::set-output name=matrix::${{ toJson(MATRIX) }}""
+          echo "::set-output name=matrix::${{ toJson(MATRIX) }}"
         
   test:
     needs: start
