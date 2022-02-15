@@ -1,7 +1,7 @@
 name: setup
 
 on:
-  workflow_dispatch
+  push
 
 jobs:
   setup:
@@ -12,7 +12,7 @@ jobs:
 
     - name: Change files
       run: |
-        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | sed -r 's|-|_|g')
+        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}")
 
         sed -i -E 's|name=\".*?\"|name="'"$PACKAGE_NAME"'"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.repository.owner.login }}"|g' setup.py
