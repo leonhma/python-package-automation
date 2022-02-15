@@ -34,9 +34,10 @@ jobs:
         if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
           python3 -V
-          MATRIX="{\"version\": $(python3 .github/workflows/vermin.py)}"
+          echo "$(vermin --no-parse-comments -f parsable --no-config . | tail -n 1)"
+          MATRIX=$(python3 .github/workflows/vermin.py)
           echo $MATRIX
-          echo "::set-output name=matrix::${{ toJson(MATRIX) }}"
+          echo "::set-output name=matrix::$MATRIX"
         
   test:
     needs: start
