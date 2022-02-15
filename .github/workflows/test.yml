@@ -36,6 +36,7 @@ jobs:
           START=false
           MATRIX=()
           for VERSION in "${VERSIONS[@]}"; do
+            echo "$VERSION"
             if "$VERMIN" == *"$VERSION"* ]]; then
               START=true
             fi
