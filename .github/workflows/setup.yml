@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    if: ${{!secrets._SETUP_DISABLED}}
+    if: ${{secrets._SETUP_DISABLED != 'DISABLED'}}
     runs-on: ubuntu-latest
 
     steps:
