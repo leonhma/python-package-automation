@@ -31,23 +31,23 @@ jobs:
       - id: set-matrix
         if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
-          versions=('3.4' '3.5' '3.6' '3.7' '3.8' '3.9' '3.10')
-          vermin=$(vermin --no-parse-comments -q  --no-config .)
-          start=false
-          matrix=()
-          echo "$versions"
-          echo "$vermin"
-          echo "$start"
-          echo "$matrix"
-          for version in versions; do
-            if "$vermin" == *"$version"* ]]; then
-              start=true
+          VERSIONS=('3.4' '3.5' '3.6' '3.7' '3.8' '3.9' '3.10')
+          VERMIN=$(vermin --no-parse-comments -q  --no-config .)
+          START=false
+          MATRIX=()
+          echo "$VERSIONS"
+          echo "$VERMIN"
+          echo "$START"
+          echo "$MATRIX"
+          for VERSION in $VERSIONS; do
+            if "$VERMIN" == *"$VERSION"* ]]; then
+              START=true
             fi
-            start && matrix += version
-            echo "$matrix"
+            START && MATRIX+=$VERSION
+            echo "$MATRIX"
           done
-          echo "$matrix"
-          echo "::set-output name=matrix::${{ toJson(matrix) }}
+          echo "$MATRIX"
+          echo "::set-output name=matrix::${{ toJson($MATRIX) }}
         
   test:
     needs: start
