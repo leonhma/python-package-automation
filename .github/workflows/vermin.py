@@ -38,5 +38,5 @@ for exception in exceptions:
     for x in out:
         if x.startswith(exception): out.remove(x)
 
-str_ = sorted(list(out)).__repr__().replace(' ', '').replace("'", '\\"')
-print('{\\"versions\\":'+str_+'}')
+str_ = sorted(list(out)).__repr__().replace(' ', '').replace("'", '"')
+print('{"versions":'+str_+'}')
