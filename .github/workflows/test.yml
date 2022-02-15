@@ -36,6 +36,7 @@ jobs:
           VERMIN="$(vermin --no-parse-comments -f parsable --no-config . | tail -n2 | head -n1)""
           START=false
           MATRIX=()
+          echo "${VERSIONS[@]}"
           for VERSION in "${VERSIONS[@]}"; do
             echo 1
             echo "$VERSION"
