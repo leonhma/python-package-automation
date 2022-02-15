@@ -28,7 +28,7 @@ jobs:
           start=false
           matrix=()
           for version in versions; do
-            if [[ "vermin" == *"version"* ]]; then
+            if "$vermin" == *"$version"* ]]; then
               start=true
             fi
             start && matrix += version
