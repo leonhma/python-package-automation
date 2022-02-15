@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    if: ${{secrets._SETUP_DISABLED != 'DISABLED'}}
+    if: ${{github.repository != 'leonhma/python-package-automation'}}
     runs-on: ubuntu-latest
 
     steps:
