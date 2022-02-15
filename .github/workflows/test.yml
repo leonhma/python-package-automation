@@ -31,26 +31,15 @@ jobs:
       - id: set-matrix
         if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
-          echo 1
           VERSIONS=("3.4" "3.5" "3.6" "3.7" "3.8" "3.9" "3.10")
-          echo 2
-          vermin --no-parse-comments -f parsable --no-config .
-          echo 2.5
-          VERMIN="$(vermin --no-parse-comments -f parsable --no-config . | tail -n1)""
-          echo 3
+          VERMIN="$(vermin --no-parse-comments -f parsable --no-config . | tail -n2 | head -n1)""
           START=false
-          echo 4
           MATRIX=()
-          echo "$VERSIONS"
-          echo "$VERMIN"
-          echo "$START"
-          echo "$MATRIX"
-          for VERSION in $VERSIONS; do
+          for VERSION in "${VERSIONS[@]}; do
             if "$VERMIN" == *"$VERSION"* ]]; then
               START=true
             fi
             START && MATRIX+=$VERSION
-            echo "$MATRIX"
           done
           echo "$MATRIX"
           echo "::set-output name=matrix::${{ toJson(MATRIX) }}
