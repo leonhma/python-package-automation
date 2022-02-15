@@ -21,21 +21,23 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install vermin
-      - id: continue
+      - name: check whether to run
+        id: continue
         run: |
           if [! -f '.github/workflows/setup.yml'] && [-f '**/test*.py']; then
             echo "::set-output name=continue::true"
           else
             echo "::set-output name=continue::true"
           fi
-      - id: set-matrix
+      - name: run vermin
+        id: set-matrix
         if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
-          bash --version
           VERSIONS=("3.4" "3.5" "3.6" "3.7" "3.8" "3.9" "3.10")
           VERMIN="$(vermin --no-parse-comments -f parsable --no-config . | tail -n 2 | head -n 1)"
           START=false
           MATRIX=()
+          echo "$VERMIN"
           echo "${VERSIONS[@]}"
           for VERSION in "${VERSIONS[@]}"; do
             echo "$VERSION"
