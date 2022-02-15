@@ -10,10 +10,10 @@ with open(README, "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="python_package_automation",  # placeholder (name of repo)
+    name="python-package-automation",  # placeholder (name of repo)
     version="1",  # placeholder (tag of release)
     author="leonhma",  # placeholder (owner of repo)
-    description="description",  # placeholder (description of repo)
+    description="A template repo for python package publishing automation",  # placeholder (description of repo)
     url="https://github.com/leonhma/python-package-automation",  # placeholder (url of repo)
     long_description=long_description,
     long_description_content_type=README_MIME,

@@ -9,9 +9,9 @@ import sys
 
 sys.path.insert(0, os.path.abspath('..'))
 
-project = "<>"
-copyright = "<>"
-author = "<>"
+project = "python-package-automation"
+copyright = "GNU General Public License v3.0"
+author = "leonhma"
 release = "<>"
 
 # -- General configuration ---------------------------------------------------
