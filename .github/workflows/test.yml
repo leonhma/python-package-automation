@@ -36,12 +36,14 @@ jobs:
           START=false
           MATRIX=()
           for VERSION in "${VERSIONS[@]}"; do
+            echo 1
             echo "$VERSION"
             if [[ "$VERMIN" == *"$VERSION"* ]]; then
               START=true
             fi
             START && MATRIX+=$VERSION
           done
+          echo 2
           echo "$MATRIX"
           echo "::set-output name=matrix::${{ toJson(MATRIX) }}
         
