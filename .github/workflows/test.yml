@@ -6,13 +6,11 @@ on:
      - "docs/**"
 
 jobs:
-  start:
+  staging:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
       continue: ${{ steps.continue.outputs.continue}}
     steps:
-      # version: [...]
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
@@ -24,24 +22,28 @@ jobs:
       - name: check whether to run
         id: continue
         run: |
-          if [! -f '.github/workflows/setup.yml'] && [-f '**/test*.py']; then
+          if ! test -f '.github/workflows/setup.yml' && test -f '**/test*.py'; then
             echo "::set-output name=continue::true"
           else
-            echo "::set-output name=continue::true"
+            echo "::set-output name=continue::false"
           fi
+  
+  start:  # too much code bc github doesnt allow for file detection in it's if directory
+    needs: staging
+    if: ${{ fromJson(needs.staging.outputs.continue) }}
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
       - name: run vermin
         id: set-matrix
         if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
-          python3 -V
-          echo "$(vermin --no-parse-comments -f parsable --no-config . | tail -n 1)"
           MATRIX=$(python3 .github/workflows/vermin.py)
-          echo $MATRIX
           echo "::set-output name=matrix::$MATRIX"
-        
+
   test:
     needs: start
-    if: ${{ fromJson(needs.start.outputs.continue) }}
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.start.outputs.matrix) }}
@@ -77,7 +79,7 @@ jobs:
           retention-days: 1
 
   publish-test-results:
-    name: "Publish unittest results"
+    name: "publish test results"
     needs: test
     runs-on: ubuntu-latest
     steps:
