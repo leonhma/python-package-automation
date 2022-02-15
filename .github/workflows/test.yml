@@ -31,6 +31,7 @@ jobs:
       - id: set-matrix
         if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
+          bash --version
           VERSIONS=("3.4" "3.5" "3.6" "3.7" "3.8" "3.9" "3.10")
           VERMIN="$(vermin --no-parse-comments -f parsable --no-config . | tail -n2 | head -n1)""
           START=false
