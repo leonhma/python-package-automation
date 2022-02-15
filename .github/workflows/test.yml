@@ -29,7 +29,7 @@ jobs:
             echo "::set-output name=continue::false"
           fi
       - id: set-matrix
-        if: ${{ fromJson(steps.continue.outputs.continue) }}
+        if: ${{ steps.continue.outputs.continue }}
         run: |
           versions=('3.4' '3.5' '3.6' '3.7' '3.8' '3.9' '3.10')
           vermin=$(vermin --no-parse-comments -q  --no-config .)
@@ -45,7 +45,7 @@ jobs:
         
   test:
     needs: start
-    if: ${{ fromJson(needs.start.outputs.continue) }}
+    if: ${{ needs.start.outputs.continue }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
