@@ -34,7 +34,7 @@ jobs:
           echo 1
           VERSIONS=("3.4" "3.5" "3.6" "3.7" "3.8" "3.9" "3.10")
           echo 2
-          VERMIN=$(vermin --no-parse-comments -q  --no-config .)
+          VERMIN=$(vermin --no-parse-comments -q --no-config .)
           echo 3
           START=false
           echo 4
