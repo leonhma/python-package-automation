@@ -28,15 +28,16 @@ jobs:
 
     - name: substitute placeholders in release body
       run: |
-        if [[ "${{ github.event.release.body }}" == *"[vermin_output]"* ]]; then
+        BODY=${{ github.event.release.body }}
+        if [[ "$BODY" == *"[vermin_output]"* ]]; then
           pip install vermin
           VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
-          BODY=${${{ github.event.release.body }}//"[vermin_output]"/"$VERMIN_OUTPUT"}
+          NEW_BODY=${BODY//[vermin_output]/$VERMIN_OUTPUT}
           curl \
             -X PATCH \
             -H "Accept: application/vnd.github.v3+json" \
             ${{ github.event.release.url }} \
-            -d '{"body":"$BODY"}'
+            -d '{"body":"$NEW_BODY"}'
         fi
         
     - name: Build
