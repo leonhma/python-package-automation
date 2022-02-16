@@ -29,6 +29,8 @@ jobs:
     - name: substitute placeholders in release body
       run: |
         BODY=${{ github.event.release.body }}
+        echo $BODY
+        echo ${{ github.event.release.url }}
         if [[ "$BODY" == *"[vermin_output]"* ]]; then
           pip install vermin
           VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
