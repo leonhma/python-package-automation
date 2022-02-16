@@ -10,7 +10,7 @@ This is a template that contains workflows to automatically update documentation
 * Second, click 'use this template' in the upper right corner
 * Name your repository the name you have just thought of (I discourage the use of dashes here, since it can be quite annoying if your package is called differently on pypi and in the program) and set a description. This will enable the setup workflow to automatically fill in some of the details in the package files.
 * You should now see a job 'setup' pop up (after ca. 10 sec, you might have to refresh the page). Wait for it to finish and move on.
-**Feel free to now edit setup.py, docs/*, readme.md and the folder named like your repo to your liking**
+* You should now as the last step create a license. Create a file called `LICENSE` in the root directory and simply choose one that fits your project.
 
 ## Automated distribution on release
 
