@@ -35,6 +35,7 @@ jobs:
           pip install vermin
           VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
           NEW_BODY=${BODY//[vermin_output]/$VERMIN_OUTPUT}
+          echo $NEW_BODY
           curl \
             -X PATCH \
             -H "Accept: application/vnd.github.v3+json" \
