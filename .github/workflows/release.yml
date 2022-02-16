@@ -6,7 +6,7 @@ on:
     
 jobs:
   
-  publish-binaries:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,24 +26,19 @@ jobs:
       run: |
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
 
-    - name: substitute placeholders in release body
+    - name: substitute '[vermin_output]' with vermin output
+      if: ${{ contains(github.event.release.body, '[vermin_output]') }}
       run: |
-        BODY="${{ github.event.release.body }}"
-        echo $BODY
-        echo ${{ github.event.release.url }}
-        if [[ "$BODY" == *"[vermin_output]"* ]]; then
-          pip install vermin
-          VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
-          NEW_BODY=${BODY//"[vermin_output]"/$VERMIN_OUTPUT}
-          echo $NEW_BODY
-          echo 1
-          curl \
-            -X PATCH \
-            -H "Accept: application/vnd.github.v3+json" \
-            ${{ github.event.release.url }} \
-            -d '{"body":"$NEW_BODY"}'
-        fi
-        
+        pip install vermin
+        VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
+        NEW_BODY=${(${{ github.event.release.body }})//"[vermin_output]"/$VERMIN_OUTPUT}
+        echo $NEW_BODY
+        echo $VERMIN_OUTPUT
+        curl \
+          -X PATCH \
+          -H "Accept: application/vnd.github.v3+json" \
+          ${{ github.event.release.url }} \
+          -d '{"body":"$NEW_BODY"}'
     - name: Build
       run: |
         python setup.py sdist bdist_wheel
