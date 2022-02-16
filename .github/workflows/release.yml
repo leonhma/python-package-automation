@@ -28,7 +28,7 @@ jobs:
 
     - name: substitute placeholders in release body
       run: |
-        BODY=${{ github.event.release.body }}
+        BODY="${{ github.event.release.body }}"
         echo $BODY
         echo ${{ github.event.release.url }}
         if [[ "$BODY" == *"[vermin_output]"* ]]; then
