@@ -25,6 +25,19 @@ jobs:
     - name: Modify setup.py version
       run: |
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
+
+    - name: substitute placeholders in release body
+      run: |
+        if [[ "${{ on.release.body }}" == *"[vermin_output]"* ]]; then
+          pip install vermin
+          VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
+          BODY=${${{ on.release.body }}//"[vermin_output]"/"$VERMIN_OUTPUT"}
+          curl \
+            -X PATCH \
+            -H "Accept: application/vnd.github.v3+json" \
+            ${{ on.release.url }} \
+            -d '{"body":"$BODY"}'
+        fi
         
     - name: Build
       run: |
