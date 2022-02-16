@@ -34,8 +34,9 @@ jobs:
         if [[ "$BODY" == *"[vermin_output]"* ]]; then
           pip install vermin
           VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
-          NEW_BODY=${BODY//[vermin_output]/$VERMIN_OUTPUT}
+          NEW_BODY=${BODY//"[vermin_output]"/$VERMIN_OUTPUT}
           echo $NEW_BODY
+          echo 1
           curl \
             -X PATCH \
             -H "Accept: application/vnd.github.v3+json" \
