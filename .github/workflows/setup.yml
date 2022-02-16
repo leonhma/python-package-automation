@@ -35,5 +35,5 @@ jobs:
       run: |
         git add -A
         git config --global user.name "${{ github.event.sender.login }}"
-        git commit -m 'Setting up repo'
+        git commit -m 'Automatic setup of repo'
         git push origin ${{ github.ref }}

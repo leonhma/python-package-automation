@@ -21,7 +21,7 @@ This is a template that contains workflows to automatically update documentation
 
 ## GitHub pages / ReadTheDocs
 
-If you want to host your documentation on ReadTheDocs, everything is already set up for you. Just go to [](readthedocs.org), create a new project, and fill in some details. (Pro tip: Link your GitHub with RTD and choose to generate previews for pull-requests. You'll see :) )
+If you want to host your documentation on ReadTheDocs, everything is already set up for you. Just go to [readthedocs.org](readthedocs.org), create a new project, and fill in some details. (Pro tip: Link your GitHub with RTD and choose to generate previews for pull-requests. You'll see :) )
 
 If you for whatever reason decide to host the documentation on github pages, here are the steps for enabling a documentation build on release:
 
@@ -33,9 +33,10 @@ If you for whatever reason decide to host the documentation on github pages, her
 ## Automatic unittesting
 
 * If you're familiar with the python testing framework `unittest`, this is for you.
-* Write your test like you normally would. With every push, your tests are run against the code you wrote. If your project depends on libraries, you can add a `requirements.txt` file, or just let `setup.py` do it's thing.
+* Write your test like you normally would. With every push, your tests are run against the code you wrote. If your project depends on libraries, you can add a `requirements.txt` file at the root level, or just let `setup.py` do it's thing.
 
 ## Some extra stuff
 
 * Tests are automatically skipped if no tests are found
 * Tests have to be in files following the pattern `test*.py`
+* If the code changes are from a pull-request, a comment in the discussion about the test results will be made
