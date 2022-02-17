@@ -18,8 +18,11 @@ jobs:
       - name: substitute '[vermin]' with vermin output
         if: ${{ contains(github.event.release.body, '[vermin]') }}
         run: |
+          pip install --upgrade pip
           pip install vermin
           echo 1
+          vermin --no-parse-comments --no-config-file -q .
+          echo 1.5
           VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
           echo 2
           BODY="${{ github.event.release.body }}"
