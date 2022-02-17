@@ -31,7 +31,8 @@ jobs:
       run: |
         pip install vermin
         VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
-        NEW_BODY=${(${{ github.event.release.body }})//"[vermin_output]"/$VERMIN_OUTPUT}
+        BODY="${{ github.event.release.body }}"
+        NEW_BODY=${(BODY//"[vermin_output]"/$VERMIN_OUTPUT}
         echo $NEW_BODY
         echo $VERMIN_OUTPUT
         curl \
