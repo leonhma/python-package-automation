@@ -34,7 +34,7 @@ jobs:
         BODY="${{ github.event.release.body }}"
         NEW_BODY=${BODY//"[vermin_output]"/$VERMIN_OUTPUT}
         echo $NEW_BODY
-        JSON=\''{"body": "'"$NEW_BODY"'"}'\'
+        JSON=$(echo \''{"body": "'"$NEW_BODY"'"}'\' | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
         echo $JSON
         curl \
           -X PATCH \
