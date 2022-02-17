@@ -1,6 +1,6 @@
 name: gh-pages
 
-on:
+# on:  # remove the hashtag in front to enable this workflow
   release:
     types: [published]
   workflow_dispatch:
