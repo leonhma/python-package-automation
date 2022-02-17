@@ -40,7 +40,7 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           -u ${{ github.event.sender.login }}:${{ secrets.GITHUB_TOKEN }} \
           ${{ github.event.release.url }} \
-          -d '{"body":"$NEW_BODY"}'
+          -d '{"body":'$NEW_BODY'}'
     - name: Build
       run: |
         python setup.py sdist bdist_wheel
