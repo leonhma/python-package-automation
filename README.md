@@ -41,3 +41,4 @@ If you for whatever reason decide to host the documentation on github pages, her
 * Tests have to be in files following the pattern `test*.py`
 * If the code changes are from a pull-request, a comment in the discussion about the test results will be made
 * Take a look at [shields.io](shields.io) and search for 'github'. You'll get an idea of what badges in your readme can be used for!
+* You can use the placeholder `[vermin]` in your release notes. They will dynamically be replaced with the version requirements of this package.

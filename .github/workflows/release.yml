@@ -26,22 +26,6 @@ jobs:
       run: |
         sed -i -E 's|version=\".*?\"|version="${{ github.event.release.tag_name }}"|g' setup.py
 
-    - name: substitute '[vermin_output]' with vermin output
-      if: ${{ contains(github.event.release.body, '[vermin_output]') }}
-      run: |
-        pip install vermin
-        VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
-        BODY="${{ github.event.release.body }}"
-        NEW_BODY=${BODY//"[vermin_output]"/$VERMIN_OUTPUT}
-        echo $NEW_BODY
-        JSON=$(echo '{"body": "'"$NEW_BODY"'"}' | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
-        echo $JSON
-        curl \
-          -X PATCH \
-          -H "Accept: application/vnd.github.v3+json" \
-          -u ${{ github.event.sender.login }}:${{ secrets.GITHUB_TOKEN }} \
-          ${{ github.event.release.url }} \
-          -d "$JSON"
     - name: Build
       run: |
         python setup.py sdist bdist_wheel
