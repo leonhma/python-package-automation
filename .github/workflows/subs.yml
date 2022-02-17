@@ -11,6 +11,7 @@ jobs:
     if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: '3.10'
@@ -20,17 +21,10 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install vermin
-          echo 1
-          vermin --no-parse-comments --no-config-file -q .
-          echo 1.5
           VERMIN_OUTPUT=$(vermin --no-parse-comments --no-config-file -q .)
-          echo 2
           BODY="${{ github.event.release.body }}"
-          echo 3
           NEW_BODY=${BODY//"[vermin]"/$VERMIN_OUTPUT}
-          echo 4
           JSON=$(echo '{"body": "'"$NEW_BODY"'"}' | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
-          echo 5
           curl \
             -X PATCH \
             -H "Accept: application/vnd.github.v3+json" \
