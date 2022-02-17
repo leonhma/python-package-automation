@@ -34,13 +34,14 @@ jobs:
         BODY="${{ github.event.release.body }}"
         NEW_BODY=${BODY//"[vermin_output]"/$VERMIN_OUTPUT}
         echo $NEW_BODY
-        echo $VERMIN_OUTPUT
+        JSON=\''{"body": "'"$NEW_BODY"'"}'\'
+        echo $JSON
         curl \
           -X PATCH \
           -H "Accept: application/vnd.github.v3+json" \
           -u ${{ github.event.sender.login }}:${{ secrets.GITHUB_TOKEN }} \
           ${{ github.event.release.url }} \
-          -d \''{"body": "'"$NEW_BODY"'"}'\'
+          -d $JSON
     - name: Build
       run: |
         python setup.py sdist bdist_wheel
