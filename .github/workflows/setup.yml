@@ -1,7 +1,7 @@
 name: setup
 
 on:
-  create
+  push
 
 jobs:
   setup:
