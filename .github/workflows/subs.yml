@@ -8,7 +8,7 @@ on:
 
 jobs:
   release:
-    if: ${{ github.event_name == 'released' }}
+    if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
     steps:
       - name: substitute '[vermin]' with vermin output
