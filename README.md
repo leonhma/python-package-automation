@@ -1,6 +1,6 @@
 # python-package-automation
 
-This is a template that contains workflows to automatically update documentation using sphinx, push it to github pages, upload release binaries as assets and run existing unittests on every push.
+This is a template that contains workflows to automatically perform testing, publish release assets and push them to pypi on release, issue templates, workflow cleanup, and some quality-of-life for python packages.
 
 ## How to use this template
 
@@ -34,4 +34,4 @@ If you want to host your documentation on ReadTheDocs, everything is already set
 * Tests have to be in files following the pattern `test*.py`
 * If the code changes are from a pull-request, a comment in the discussion about the test results will be made
 * Take a look at [shields.io](shields.io) and search for 'github'. You'll get an idea of what badges in your readme can be used for!
-* You can use the placeholder `[vermin]` in your release notes. They will dynamically be replaced with the version requirements of this package.
+* You can use the placeholder `[vermin]` in your release notes. It will dynamically be replaced with the version requirements of this package.
