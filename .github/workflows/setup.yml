@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    if: ${{github.repository != 'leonhma/python-package-automation'}}  # dont self-destruct in the main-repo
+    if: github.repository != 'leonhma/python-package-automation'  # dont self-destruct in the main-repo
     runs-on: ubuntu-latest
 
     steps:

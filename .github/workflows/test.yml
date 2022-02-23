@@ -6,10 +6,10 @@ on:
      - "docs/**"
 
 jobs:
-  staging:
+  staging:  # too much code bc github doesnt allow for file detection in it's if directory
     runs-on: ubuntu-latest
     outputs:
-      continue: ${{ steps.continue.outputs.continue}}
+      continue: ${{ steps.continue.outputs.continue }}
     steps:
       - uses: actions/checkout@v2
       - name: check whether to run
@@ -20,10 +20,10 @@ jobs:
           else
             echo "::set-output name=continue::false"
           fi
-  
-  start:  # too much code bc github doesnt allow for file detection in it's if directory
+
+  create-matrix:
     needs: staging
-    if: ${{ fromJson(needs.staging.outputs.continue) }}
+    if: fromJson(needs.staging.outputs.continue)
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -38,16 +38,15 @@ jobs:
           pip install vermin
       - name: run vermin
         id: set-matrix
-        if: ${{ fromJson(steps.continue.outputs.continue) }}
         run: |
           MATRIX=$(python3 .github/workflows/vermin.py)
           echo "::set-output name=matrix::$MATRIX"
 
   test:
-    needs: start
+    needs: create-matrix
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.start.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.create-matrix.outputs.matrix) }}
       fail-fast: false
     steps:
       - uses: actions/checkout@v2

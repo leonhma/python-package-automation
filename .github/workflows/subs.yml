@@ -8,7 +8,7 @@ on:
 
 jobs:
   release:
-    if: ${{ github.event_name == 'release' }}
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
           python-version: '3.10'
 
       - name: substitute '[vermin]' with vermin output
-        if: ${{ contains(github.event.release.body, '[vermin]') }}
+        if: contains(github.event.release.body, '[vermin]')
         run: |
           pip install --upgrade pip
           pip install vermin
