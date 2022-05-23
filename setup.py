@@ -19,7 +19,7 @@ setuptools.setup(
     long_description_content_type=README_MIME,
     packages=setuptools.find_packages(),
     author_email="",  # the email of the repo owner
-    classifiers=[  # add some info about you package
+    classifiers=[
         "Programming Language :: Python",
         "Operating System :: OS Independent"
     ],
