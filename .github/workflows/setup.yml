@@ -20,7 +20,7 @@ jobs:
         sed -i -E 's|description=\".*?\"|description="${{ github.event.repository.description }}"|g' setup.py
         sed -i -E 's|url=\".*?\"|url="${{ github.event.repository.html_url }}"|g' setup.py
 
-        perl -0777pi -e 's/<!--cut-->.*?<!--cut-->/## TODO\n[ ] choose a license ([choosealicense](https://choosealicense.com))/gs' README.md
+        perl -0777pi -e 's|<!--cut-->.*?<!--cut-->|## TODO\n\n- [ ] choose a license ([choosealicense.com](https://choosealicense\.com))|gs' README.md
 
         sed -i -E 's|project = ".*?"|project = "'"$PACKAGE_NAME"'"|g' docs/conf.py
         sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' docs/conf.py
