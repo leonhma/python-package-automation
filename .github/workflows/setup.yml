@@ -21,9 +21,13 @@ jobs:
         sed -i -E 's|url=\".*?\"|url="${{ github.event.repository.html_url }}"|g' setup.py
 
         REPO_LICENSE=$(curl -s "https://api.github.com/repos/${{ github.event.repository.full_name }}/license" | jq -r '.license.key')
-        GIST_URL='https://gist.githubusercontent.com/leonhma/a6acb474c4261831629c452acc147cff/raw/94d9e2e26cc1d0d536f52c786e2714971329276c/pypi-licenses.json'
-        COPYRIGHT_CLASSIFIER=$(curl -s $GIST_URL | jq -r ".${REPO_LICENSE}")
-        sed -i -E "s|classifiers=[|classifiers=[\n${COPYRIGHT_CLASSIFIER},|g" setup.py
+        if [ "$REPO_LICENSE" != "null" ]; then
+          GIST_URL='https://gist.githubusercontent.com/leonhma/a6acb474c4261831629c452acc147cff/raw/94d9e2e26cc1d0d536f52c786e2714971329276c/pypi-licenses.json'
+          COPYRIGHT_CLASSIFIER=$(curl -s $GIST_URL | jq -r ".${REPO_LICENSE}")
+          perl -0777pi -e "s/classifiers=\[/classifiers=\[\n\t\t\"${COPYRIGHT_CLASSIFIER}\",/s" setup.py
+        fi
+
+        perl -0777pi -e 's/<!--cut-->.*?<!--cut-->//gs' README.md
 
         sed -i -E 's|project = ".*?"|project = "'"$PACKAGE_NAME"'"|g' docs/conf.py
         sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' docs/conf.py
@@ -40,5 +44,5 @@ jobs:
       run: |
         git add -A
         git config --global user.name "${{ github.event.sender.login }}"
-        git commit -m 'Automatic setup of repo'
+        git commit -m '[skip ci] Automatic setup of repo'
         git push origin ${{ github.ref }}

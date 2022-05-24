@@ -2,6 +2,7 @@
 
 This is a template that contains workflows to automatically perform testing, publish release assets and push them to pypi on release, issue templates, workflow cleanup, and some quality-of-life for python packages.
 
+<!--cut-->
 ## How to use this template
 
 ### Setup
@@ -10,6 +11,7 @@ This is a template that contains workflows to automatically perform testing, pub
 * Second, click 'use this template' in the upper right corner
 * Name your repository the name you have just thought of (I discourage the use of dashes here, since it can be quite annoying if your package is called differently on pypi and in the program), set a description and choose a license. This will enable the setup workflow to automatically fill in some of the details in the package files.
 * You should now see a job 'setup' pop up (after ca. 10 sec, you might have to refresh the page). Wait for it to finish and move on.
+<!--cut-->
 
 ## Automated distribution on release
 
@@ -26,6 +28,10 @@ If you want to host your documentation on ReadTheDocs, everything is already set
 
 * If you're familiar with the python testing framework `unittest`, this is for you.
 * Write your test like you normally would. With every push, your tests are run against the code you wrote. If your project depends on libraries, you can add a `requirements.txt` file at the root level, or just let `setup.py` do it's thing.
+
+## FOSSA analysis
+
+If you want to use FOSSA to analyze your code for license violations, vulnerabilities and quality management (coming soon), you can include a fossa api key in your secrets as `FOSSA_API_KEY`.
 
 ## Some extra stuff
 
