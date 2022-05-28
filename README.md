@@ -1,4 +1,4 @@
-# python-package-automation
+# python_package_automation
 
 This is a template that contains workflows to automatically perform testing, publish release assets and push them to pypi on release, issue templates, workflow cleanup, and some quality-of-life for python packages.
 
@@ -40,3 +40,4 @@ If you want to use FOSSA to analyze your code for license violations, vulnerabil
 * If the code changes are from a pull-request, a comment in the discussion about the test results will be made
 * Take a look at [shields.io](shields.io) and search for 'github'. You'll get an idea of what badges in your readme can be used for!
 * You can use the placeholder `[vermin]` in your release notes. It will dynamically be replaced with the version requirements of this package.
+* For codespaces users: It might take some time for the config to be loaded successfully. After loading into the codespace for the first time, just lean back for a minute, don't touch anything and then hit refresh.
