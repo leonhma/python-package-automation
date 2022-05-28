@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    if: github.event.created
+    if: github.repository.name != "leonhma/python-package-automation"
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,7 @@ jobs:
         sed -i -E "s|automodule\:\: .+?$|automodule\:\: ""$PACKAGE_NAME""|gm" docs/reference.rst
         sed -i -E "s|Welcome to .+?'s|Welcome to ""$PACKAGE_NAME""'s|g" docs/index.rst
 
-        sed -i -E '"name": ".*?"|name="'"$PACKAGE_NAME"'"|' .devcontainer.json
+        sed -i -E 's|"name": ".*?"|name="'"$PACKAGE_NAME"'"|' .devcontainer.json
 
         mv python-package-automation/ "$PACKAGE_NAME"/
 
