@@ -1,9 +1,10 @@
 {
     "name": "python-package-automation",
-    "onCreateCommand": "pip install -r requirements.txt && pip install docutils esbonio",
+    "onCreateCommand": "pip install -r requirements.txt && pip install docutils esbonio pylama sphinx_rtd_theme",
     "customizations": {
         "vscode": {
-            "extensions": ["njpwerner.autodocstring",
+            "extensions": [
+                "njpwerner.autodocstring",
                 "cschleiden.vscode-github-actions",
                 "eamodio.gitlens",
                 "VisualStudioExptTeam.vscodeintellicode",
@@ -13,9 +14,10 @@
                 "ms-python.vscode-pylance",
                 "ms-python.python",
                 "trond-snekvik.simple-rst",
-                "lextudio.restructuredtext",
-                "benjaminbenais.copilot-theme"],
+                "lextudio.restructuredtext"],
             "settings": {
+                "esbonio.sphinx.buildDir": "${workspaceFolder}/docs/_build",
+                "esbonio.sphinx.confDir": "${workspaceFolder}/docs",
                 "python.linting.pylintEnabled": false,
                 "python.linting.pylamaEnabled": true,
                 "python.linting.enabled": true,

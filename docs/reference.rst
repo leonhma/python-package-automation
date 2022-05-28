@@ -1,5 +1,6 @@
 Reference
 =========
 
-.. automodule:: python-package-automation
+    
+.. automodule:: python_package_automation
     :members:

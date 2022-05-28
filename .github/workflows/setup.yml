@@ -13,7 +13,7 @@ jobs:
 
     - name: Change files
       run: |
-        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}")
+        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | sed -r "s|[-]|_|")
 
         sed -i -E 's|name=\".*?\"|name="'"$PACKAGE_NAME"'"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.repository.owner.login }}"|g' setup.py
@@ -31,7 +31,7 @@ jobs:
 
         sed -i -E 's|"name": ".*?"|"name": "'"$PACKAGE_NAME"'"|' .devcontainer.json
 
-        mv python-package-automation/ "$PACKAGE_NAME"/
+        mv python_package_automation/ "$PACKAGE_NAME"/
 
         rm -f .github/workflows/setup.yml
 
