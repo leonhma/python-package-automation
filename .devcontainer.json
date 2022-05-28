@@ -1,4 +1,40 @@
 {
     "name": "python-package-automation",
-    "onCreateCommand": "pip install -r requirements.txt"
+    "onCreateCommand": "pip install -r requirements.txt",
+    "customizations": {
+        "vscode": {
+            "extensions": ["njpwerner.autodocstring",
+                "cschleiden.vscode-github-actions",
+                "eamodio.gitlens",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "bierner.markdown-preview-github-styles",
+                "DavidAnson.vscode-markdownlint",
+                "PKief.material-icon-theme",
+                "ms-python.vscode-pylance",
+                "ms-python.python",
+                "lextudio.restructuredtext",
+                "benjaminbenais.copilot-theme"],
+            "settings": {
+                "python.linting.pylintEnabled": false,
+                "python.linting.pylamaEnabled": true,
+                "python.linting.enabled": true,
+                "files.autoSave": "afterDelay",
+                "files.autoSaveDelay": 1000,
+                "[python]": {
+                    "editor.defaultFormatter": "ms-python.python"
+                },
+                "python.formatting.autopep8Args": ["--experimental"],
+                "editor.formatOnSave": true,
+                "editor.suggestSelection": "first",
+                "python.languageServer": "Pylance",
+                "workbench.iconTheme": "material-icon-theme",
+                "autoDocstring.docstringFormat": "numpy",
+                "editor.inlineSuggest.enabled": true,
+                "autoDocstring.startOnNewLine": true,
+                "workbench.colorTheme": "GitHub Dark Default",
+                "git.enableCommitSigning": true,
+                "esbonia.sphinx.confDir": "docs/"
+            }
+        }
+    }
 }
