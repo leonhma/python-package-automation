@@ -1,6 +1,6 @@
 {
     "name": "python-package-automation",
-    "onCreateCommand": "pip install -r requirements.txt",
+    "onCreateCommand": "pip install -r requirements.txt && pip install docutils esbonio",
     "customizations": {
         "vscode": {
             "extensions": ["njpwerner.autodocstring",
@@ -12,6 +12,7 @@
                 "PKief.material-icon-theme",
                 "ms-python.vscode-pylance",
                 "ms-python.python",
+                "trond-snekvik.simple-rst",
                 "lextudio.restructuredtext",
                 "benjaminbenais.copilot-theme"],
             "settings": {
