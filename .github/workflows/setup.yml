@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    if: github.repository.name != "leonhma/python-package-automation"
+    if: github.repository != 'leonhma/python-package-automation'
     runs-on: ubuntu-latest
 
     steps:
