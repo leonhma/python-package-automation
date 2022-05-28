@@ -1,4 +1,4 @@
-name:
+name: push
 
 on:
   push:
@@ -17,4 +17,13 @@ jobs:
         uses: fossa-contrib/fossa-action@v1
         with:
           fossa-api-key: ${{ env.FOSSA_API_KEY }}
-  
+    
+      - name: Install dependencies
+        run: |
+          pip install pipreqs
+
+      - name: Run pipreqs
+        run: pipreqs --force
+
+      - name: Commit changes
+        run: |

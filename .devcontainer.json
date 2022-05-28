@@ -1,0 +1,4 @@
+{
+    "name": "python-package-automation",
+    "onCreateCommand": "pip install -r requirements.txt"
+}
