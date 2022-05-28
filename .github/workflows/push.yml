@@ -13,21 +13,22 @@ jobs:
       - uses: actions/checkout@v2
         
       - name: Check whether setting up repo
+        id: setup
         run: |
           if [ -f .github/workflows/setup.yml ]; then
-            echo "::set-env name=setup::false"
+            echo "::set-output name=setup::false"
           else
-            echo "::set-env name=setup::true"
+            echo "::set-output name=setup::true"
           fi
 
       - name: Run Fossa and upload data
-        if: env.FOSSA_API_KEY != '' && env.setup
+        if: env.FOSSA_API_KEY != '' && steps.setup.setup
         uses: fossa-contrib/fossa-action@v1
         with:
           fossa-api-key: ${{ env.FOSSA_API_KEY }}
     
       - name: Install dependencies
-        if: env.setup
+        if: steps.setup.setup
         run: |
           pip install pipreqs
           if [ -f requirements.txt ]; then
@@ -35,11 +36,11 @@ jobs:
           fi
 
       - name: Run pipreqs
-        if: env.setup
+        if: steps.setup.setup
         run: pipreqs --force
 
       - name: Commit changes if needed
-        if: env.setup
+        if: steps.setup.setup
         run: |
           if [ $(git diff --quiet HEAD || echo $?) -ne 0 ]; then
             git add .
