@@ -29,7 +29,8 @@ jobs:
         run: |
           if [ $(git diff --quiet HEAD || echo $?) -ne 0 ]; then
             git add .
-            git config --global user.name "${{ github.event.sender.login }}"
+            git config user.name "${github.event.sender.login}"
+            git config user.email "${github.event.sender.email}"
             git commit -m "[chore] Update requirements"
             git push origin master
           fi
