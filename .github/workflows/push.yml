@@ -22,13 +22,13 @@ jobs:
           fi
 
       - name: Run Fossa and upload data
-        if: env.FOSSA_API_KEY != '' && steps.setup.setup
+        if: env.FOSSA_API_KEY != '' && steps.setup.setup == 'true'
         uses: fossa-contrib/fossa-action@v1
         with:
           fossa-api-key: ${{ env.FOSSA_API_KEY }}
     
       - name: Install dependencies
-        if: steps.setup.setup
+        if: steps.setup.setup == 'true'
         run: |
           pip install pipreqs
           if [ -f requirements.txt ]; then
@@ -36,11 +36,11 @@ jobs:
           fi
 
       - name: Run pipreqs
-        if: steps.setup.setup
+        if: steps.setup.setup == 'true'
         run: pipreqs --force
 
       - name: Commit changes if needed
-        if: steps.setup.setup
+        if: steps.setup.setup == 'true'
         run: |
           if [ $(git diff --quiet HEAD || echo $?) -ne 0 ]; then
             git add .
