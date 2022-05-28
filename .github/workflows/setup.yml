@@ -13,7 +13,7 @@ jobs:
 
     - name: Change files
       run: |
-        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | sed -r "s|[-]|_|")
+        PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | sed -r "s|[-]|_|g")
 
         sed -i -E 's|name=\".*?\"|name="'"$PACKAGE_NAME"'"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.repository.owner.login }}"|g' setup.py
@@ -21,6 +21,7 @@ jobs:
         sed -i -E 's|url=\".*?\"|url="${{ github.event.repository.html_url }}"|g' setup.py
 
         perl -0777pi -e 's|<!--cut-->.*?<!--cut-->|## TODO\n\n- [ ] choose a license ([choosealicense.com](https://choosealicense\.com))|gs' README.md
+        sed -i -E 's|python_package_automation|'"$PACKAGE_NAME"'|' README.md
 
         sed -i -E 's|project = ".*?"|project = "'"$PACKAGE_NAME"'"|g' docs/conf.py
         sed -i -E 's|copyright = ".*?"|copyright = "${{ github.event.repository.license.name }}"|g' docs/conf.py
