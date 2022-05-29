@@ -42,7 +42,6 @@ If you want to use FOSSA to analyze your code for license violations, vulnerabil
 * Tests are automatically skipped if no tests are found
 * Tests have to be in files following the pattern `test*.py`
 * If the code changes are from a pull-request, a comment in the discussion about the test results will be made
-* For ease-of-use, a `requirements.txt` file at the root level is kept up-to-date with your dependencies.
 * Take a look at [shields.io](shields.io) and search for 'github'. You'll get an idea of what badges in your readme can be used for!
 * You can use the placeholder `[vermin]` in your release notes. It will dynamically be replaced with the version requirements of this package.
 * For codespaces users: It might take some time for the config to be loaded successfully. After loading into the codespace for the first time, just lean back for a minute, don't touch anything and then hit refresh.

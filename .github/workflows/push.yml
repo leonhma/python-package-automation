@@ -11,41 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        
-      - name: Check whether setting up repo
-        id: setup
-        run: |
-          if [ -f .github/workflows/setup.yml ]; then
-            echo "::set-output name=continue::false"
-          else
-            echo "::set-output name=continue::true"
-          fi
 
       - name: Run Fossa and upload data
         if: env.FOSSA_API_KEY != '' && steps.setup.continue == 'true'
         uses: fossa-contrib/fossa-action@v1
         with:
           fossa-api-key: ${{ env.FOSSA_API_KEY }}
-    
-      - name: Install dependencies
-        if: steps.setup.continue == 'true'
-        run: |
-          pip install pipreqs
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-
-      - name: Run pipreqs
-        if: steps.setup.continue == 'true'
-        run: pipreqs --force
-
-      - name: Commit changes if needed
-        if: steps.setup.continue == 'true'
-        run: |
-          if [ $(git diff --quiet HEAD || echo $?) -ne 0 ]; then
-            git add .
-            git config user.name "${{github.event.pusher.name}}"
-            git config user.email "${{github.event.pusher.email}}"
-            git commit -m "[chore] Update requirements"
-            git push origin master
-          fi
