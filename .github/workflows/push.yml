@@ -16,19 +16,19 @@ jobs:
         id: setup
         run: |
           if [ -f .github/workflows/setup.yml ]; then
-            echo "::set-output name=setup::false"
+            echo "::set-output name=continue::false"
           else
-            echo "::set-output name=setup::true"
+            echo "::set-output name=continue::true"
           fi
 
       - name: Run Fossa and upload data
-        if: env.FOSSA_API_KEY != '' && steps.setup.setup == 'true'
+        if: env.FOSSA_API_KEY != '' && steps.setup.continue == 'true'
         uses: fossa-contrib/fossa-action@v1
         with:
           fossa-api-key: ${{ env.FOSSA_API_KEY }}
     
       - name: Install dependencies
-        if: steps.setup.setup == 'true'
+        if: steps.setup.continue == 'true'
         run: |
           pip install pipreqs
           if [ -f requirements.txt ]; then
@@ -36,11 +36,11 @@ jobs:
           fi
 
       - name: Run pipreqs
-        if: steps.setup.setup == 'true'
+        if: steps.setup.continue == 'true'
         run: pipreqs --force
 
       - name: Commit changes if needed
-        if: steps.setup.setup == 'true'
+        if: steps.setup.continue == 'true'
         run: |
           if [ $(git diff --quiet HEAD || echo $?) -ne 0 ]; then
             git add .
