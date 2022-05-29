@@ -34,8 +34,7 @@
                 "autoDocstring.docstringFormat": "numpy",
                 "editor.inlineSuggest.enabled": true,
                 "autoDocstring.startOnNewLine": true,
-                "git.enableCommitSigning": true,
-                "esbonia.sphinx.confDir": "docs/"
+                "git.enableCommitSigning": true
             }
         }
     }
