@@ -13,7 +13,7 @@ jobs:
 
     - name: Change files
       run: |
-        PACKAGE_NAME=$(echo "${{github.event.repository.name}}" | sed -r "s|[-]|_|g")
+        PACKAGE_NAME=$(echo "${{github.event.repository.name}}" | sed -r "s|[^A-Za-z0-9]+|_|g")
 
         sed -i -E 's|name=\".*?\"|name="'"$PACKAGE_NAME"'"|g' setup.py
         sed -i -E 's|author=\".*?\"|author="${{ github.event.repository.owner.login }}"|g' setup.py
@@ -30,7 +30,7 @@ jobs:
         sed -i -E "s|automodule\:\: .+?$|automodule\:\: ""$PACKAGE_NAME""|gm" docs/reference.rst
         sed -i -E "s|Welcome to .+?'s|Welcome to ""$PACKAGE_NAME""'s|g" docs/index.rst
 
-        sed -i -E 's|"name": ".*?"|"name": "'"$REPO_NAME"'"|' .devcontainer.json
+        sed -i -E 's|"name": ".*?"|"name": "'"$PACKAGE_NAME"'"|' .devcontainer.json
 
         sed -i -E "s|python_package_automation|$PACKAGE_NAME|g" docs/setup.rst
 
