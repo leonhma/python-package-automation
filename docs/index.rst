@@ -11,6 +11,7 @@ Welcome to python-package-automation's documentation!
    :caption: Contents:
 
    reference
+   setup
 
 
 

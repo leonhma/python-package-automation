@@ -22,7 +22,11 @@ This is a template that contains workflows to automatically perform testing, pub
 
 ## ReadTheDocs
 
-If you want to host your documentation on ReadTheDocs, everything is already set up for you. Just go to [readthedocs.org](readthedocs.org), create a new project, and fill in some details. (Pro tip: Link your GitHub with RTD and choose to generate previews for pull-requests. You'll see :) )
+If you want to host your documentation on ReadTheDocs, everything is already set up for you. Just go to [readthedocs.org](readthedocs.org), create a new project, and fill in some details. (Pro tip: Link your GitHub with RTD and choose to generate previews for pull-requests.
+
+All documentation is written using reStructuredText files, and converted to html by Sphinx. Sphinx by default has the `napoleon`, `autodoc`, `intersphinx` and `coverage` extensions enabled.
+
+For the Sphinx-generated documentation preview to work, you'll have to click `Use docutils` in the bottom status bar and select `Sphinx` while editing a `.rst` file. Now you can press `Ctrl+Shift+P` and select `reStructuredText: Open Preview (to the Side)`.
 
 ## Automatic unittesting
 
@@ -38,6 +42,7 @@ If you want to use FOSSA to analyze your code for license violations, vulnerabil
 * Tests are automatically skipped if no tests are found
 * Tests have to be in files following the pattern `test*.py`
 * If the code changes are from a pull-request, a comment in the discussion about the test results will be made
+* For ease-of-use, a `requirements.txt` file at the root level is kept up-to-date with your dependencies.
 * Take a look at [shields.io](shields.io) and search for 'github'. You'll get an idea of what badges in your readme can be used for!
 * You can use the placeholder `[vermin]` in your release notes. It will dynamically be replaced with the version requirements of this package.
 * For codespaces users: It might take some time for the config to be loaded successfully. After loading into the codespace for the first time, just lean back for a minute, don't touch anything and then hit refresh.
