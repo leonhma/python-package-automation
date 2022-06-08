@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    if: !github.event.repository.is_template
+    if: ${{ !github.event.repository.is_template }}
     runs-on: ubuntu-latest
 
     steps:
